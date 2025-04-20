@@ -1,3 +1,4 @@
+import Navbar from '../components/Navbar';
 import './App.css';
 
 function App() {
@@ -9,6 +10,8 @@ function App() {
 
   return (
     <>
+      <Navbar />
+
       <div id='left-cab' className='cabinet'>
         <div className='cabinet-rim'/>
         <div className='arm-block' style={{marginLeft: "1vw", marginTop: "2vh"}}/>
@@ -34,7 +37,11 @@ function App() {
 
       <div id='fridge'>
         <div id='fridge-gap' />
-        <div id='freezer-gap' />
+        <div style={{position: "absolute",
+                      width: "64.7vw",
+                      height: "2.5px",
+                      bottom: "26vh",
+                      backgroundColor: "black"}} />
 
         <div className='arm-block' style={{bottom: "20vh", left: "22.5vw"}}/>
         <div className='arm-block' style={{bottom: "20vh", right: "22.5vw"}}/>
@@ -79,6 +86,7 @@ function App() {
                      height: "2vh",
                      backgroundColor: "rgb(246, 211, 164)", 
                      margin: "-6.4vh 0 0 9.275vw",
+                     border: "0.8px solid rgb(201, 201, 201)",
                      borderRadius: "0 5px 5px 0"}} />
       </div>
     </>

@@ -4,7 +4,7 @@
   align-items: flex-end;
   justify-content: center;
   width: 100vw;
-  height: 150vh;
+  height: 155vh;
   background-color: rgb(246, 211, 164);
 }
 
@@ -20,14 +20,6 @@
   width: 2.5px;
   height: 114vh;
   left: calc(50vw - 2.5px);
-  background-color: black;
-}
-
-#freezer-gap {
-  position: absolute;
-  width: 64.7vw;
-  height: 2.5px;
-  bottom: 26vh;
   background-color: black;
 }
 
@@ -54,14 +46,14 @@
   width: 15px;
   height: 94vh;
   left: calc(45vw + 7.5px);
-  top: calc(19vh + 6px);
+  top: calc(24vh + 6px);
 }
 
 #right-fridge-arm {
   width: 15px;
   height: 94vh;
   right: calc(45vw + 7.5px);
-  top: calc(19vh + 6px);
+  top: calc(24vh + 6px);
 }
 
 .arm-block {
@@ -73,11 +65,11 @@
 }
 
 #left-top-fridge {
-  top: 19vh;
+  top: 24vh;
   left: 45vw;
 }
 
 #right-top-fridge {
-  top: 19vh;
+  top: 24vh;
   right: 45vw;
 }
