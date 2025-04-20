@@ -1,16 +1,26 @@
 import Navbar from '../components/Navbar';
+import CreateForm from './CreateForm';
+import EditForm from './EditForm';
+import {useState, useEffect} from 'react';
 import './App.css';
 
 function App() {
+  const [otherPages, showOtherPages] = useState(0);
 
-  window.scrollTo({
-    left: 0, 
-    top: window.screen.height, 
-    behavior: "smooth"});
+  useEffect(() => {
+    window.scrollTo({
+      left: 0, 
+      top: window.screen.height, 
+      behavior: "smooth"});
+    }
+  , []);
 
   return (
     <>
-      <Navbar />
+      {otherPages == 1 && <CreateForm showOtherPages={showOtherPages}/>}
+      {otherPages == 2 && <EditForm />}
+
+      <Navbar showOtherPages={showOtherPages}/>
 
       <div id='left-cab' className='cabinet'>
         <div className='cabinet-rim'/>

@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import "./Navbar.css";
 
-function Navbar() {
+function Navbar(props) {
     const [sortValue, changeSortValue] = useState("Most Recent");
     const [orgValue, changeOrgValue] = useState("Bottom");
 
@@ -16,6 +16,10 @@ function Navbar() {
         event.preventDefault();
         console.log(event.target[0].value);
     }   
+
+    const showCreateForm = () => {
+        props.showOtherPages(1);
+    }
 
     return(
         <div id="navbar-container">
@@ -42,7 +46,8 @@ function Navbar() {
             </Box>
 
             <div id="settings-container" style={{display: "flex", alignItems: "center"}}>
-                <Button sx={{color: 'black',
+                <Button onClick={showCreateForm} 
+                        sx={{color: 'black',
                              backgroundColor: 'rgba(156, 245, 115, 255)',
                              borderRadius: '0',
                              width: '5vw', height: '5vw',
