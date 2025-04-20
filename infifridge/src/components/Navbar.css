@@ -25,3 +25,12 @@
     gap: 20px;
     margin-right: 20px;
 }
+
+.post-it-note-button-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0.75vw; 
+    overflow: clip;
+}

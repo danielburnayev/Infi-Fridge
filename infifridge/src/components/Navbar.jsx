@@ -28,15 +28,29 @@ function Navbar() {
 
             <Box component="form" onSubmit={(event) => doSearch(event)} 
                  sx={{display: "flex", alignItems: "center"}}>
-                <TextField variant="outlined" placeholder="Search for Post-It title" />
-                <Button type="submit">Search</Button>
+                <TextField variant="outlined" placeholder="Search for Post-It title" 
+                           sx={{backgroundColor: "white", borderRadius: "0", marginRight: "5px"}}/>
+                <Button type="submit" 
+                        sx={{color: 'black',
+                             backgroundColor: 'rgba(188, 240, 254, 255)',
+                             borderRadius: '0',
+                             width: '5vw', height: '5vw'}}>
+                                <div className="post-it-note-button-top" 
+                                     style={{backgroundColor: "rgba(177, 226, 240, 255)"}}/>
+                                Search
+                </Button>
             </Box>
 
             <div id="settings-container" style={{display: "flex", alignItems: "center"}}>
                 <Button sx={{color: 'black',
                              backgroundColor: 'rgba(156, 245, 115, 255)',
                              borderRadius: '0',
-                             width: '7.5vw'}}>Add Post-It Note</Button>
+                             width: '5vw', height: '5vw',
+                             overflow: "clip"}}>
+                                <div className="post-it-note-button-top" 
+                                     style={{backgroundColor: "rgba(147, 231, 109, 255)"}}/>
+                                Add Post-It
+                </Button>
                 
                 <FormControl>
                     <InputLabel id="sort-input-label">Sort By:</InputLabel>
