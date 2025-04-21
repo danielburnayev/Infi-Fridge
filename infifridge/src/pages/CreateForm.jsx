@@ -9,18 +9,6 @@ import './Pages.css';
 function CreateForm(props) {
     const [postItColor, changePostItColor] = useState('#FFFF00'); //yellow
     const [submitEvent, changeSubmitEvent] = useState(0);
-
-    const VisuallyHiddenInput = styled('input')({
-        clip: 'rect(0 0 0 0)',
-        clipPath: 'inset(50%)',
-        height: 1,
-        overflow: 'hidden',
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        whiteSpace: 'nowrap',
-        width: 1,
-      });
     
     const makePostItColorChanges = (color) => {
         const itsHex = color.hex;
@@ -45,8 +33,34 @@ function CreateForm(props) {
 
     const submitNewPostIt = (event) => {
         event.preventDefault();
-        if (submitEvent == 1) {console.log("demo post-it created");}
-        props.showOtherPages(0);
+
+        if (submitEvent == 2 || (submitEvent != 0 &&
+            event.target[0].value.length != 0 && 
+            event.target[7].value.length != 0)) {
+            props.showOtherPages(0);
+        }
+
+        if (event.target[0].value.length == 0) {
+            const titleBorder = document.getElementsByClassName('square-borders')[0];
+            const titleField = document.getElementById('title-textfield');
+
+            titleBorder.classList.add('shake-animation');
+            titleField.classList.add('shake-animation');
+            const thing = setTimeout(() => {
+                titleBorder.classList.remove('shake-animation');
+                titleField.classList.remove('shake-animation');
+                clearTimeout(thing);
+            }, 330);
+        }
+        if (event.target[7].value.length == 0) {
+            const nameField = document.getElementById('name-textfield');
+
+            nameField.classList.add('shake-animation');
+            const thing = setTimeout(() => {
+                nameField.classList.remove('shake-animation');
+                clearTimeout(thing);
+            }, 330);
+        }
     }
     
     return(
@@ -56,50 +70,90 @@ function CreateForm(props) {
 
                 <div className='note-top'/>
 
-                <TextField placeholder='Title'
-                           sx={{
-                            height: '10%',
-                            padding: '0 5px 0 5px',
-                            '& .MuiInputBase-root': {
-                              height: '100%',
-                              overflowX: 'auto',
-                            },
-                          }}/>
-                <TextField multiline placeholder='Write stuff here...'
+                <div className='square-borders'
+                     style={{top: 'calc(7.5vh + 10px)',
+                             height: '9.5%',
+                             width: '95.5%'}}/>
+                <div className='square-borders'
+                     style={{top: 'calc(7.5vh + 10% + 20px)',
+                             height: '42%',
+                             width: '95.5%'}}/>
+                <div className='square-borders'
+                     style={{top: 'calc(7.5vh + 52.5% + 30px)',
+                             height: '9.5%',
+                             width: '72.625%'}}/>
+
+                <div id='title-textfield'>
+                    <TextField placeholder='Title'
                             sx={{
-                                height: '42.5%',
+                                height: '6vh',
+                                width: '32.25vw',
                                 padding: '0 5px 0 5px',
+                                marginTop: '1.25vh',
                                 '& .MuiInputBase-root': {
-                                  height: '100%',
+                                    height: '100%',
+                                    overflowX: 'auto',
+                                    fontWeight: '700',
+                                    overflowY: 'clip',
+                                },
+                                '& .MuiInputBase-root.Mui-focused': {
+                                    '& fieldset': {border: 'none',},
+                                },
+                                '& .MuiOutlinedInput-notchedOutline': {
+                                    borderWidth: '0',
+                                }
+                            }}/>
+                </div>
+                <TextField multiline placeholder='Write stuff here... (optional)'
+                            sx={{
+                                height: '25.5vh',
+                                width: '32.25vw',
+                                padding: '0 5px 0 5px',
+                                marginTop: '1.25vh',
+                                '& .MuiInputBase-root': {
+                                  height: '25.5vh',
                                   alignItems: 'flex-start',
                                   overflowY: 'auto',
                                 },
+                                '& .MuiInputBase-root.Mui-focused': {
+                                    '& fieldset': {border: 'none',},
+                                  },
                                 '& .MuiOutlinedInput-notchedOutline': {
-                                    height: '400px',
+                                    borderWidth: '0',
                                  }
                               }}/>
-                <TextField placeholder='Image URL' 
+                <TextField placeholder='Image URL (optional)' 
                            sx={{
-                            height: '10%',
+                            height: "6vh",
                             width: "75%",
                             padding: '0 5px 0 5px',
+                            marginTop: '1.25vh',
                             '& .MuiInputBase-root': {
                               height: '100%',
                               width: '100%',
                               overflowX: 'auto',
+                              overflowY: 'clip',
                             },
+                            '& .MuiInputBase-root.Mui-focused': {
+                                '& fieldset': {border: 'none',},
+                              },
+                            '& .MuiOutlinedInput-notchedOutline': {
+                                borderWidth: '0',
+                             }
                           }}/>
 
-                <p style={{position: 'absolute',
-                           bottom: '10px',
-                           left: '10px',
-                           margin: '0',
-                           fontSize: "45px",
-                           fontWeight: "700"}}> - </p>
-                <TextField placeholder='Name' 
-                           style={{position: 'absolute',
-                                   bottom: '5px',
-                                   left: '30px'}}/>
+                <div id='name-textfield' style={{display: 'flex', marginTop: '3vh'}}>
+                    <p style={{margin: '5px 0 0 5px', fontSize: "30px", fontWeight: "700"}}> - </p>
+                    <TextField placeholder='Name' 
+                            sx={{'& .MuiOutlinedInput-notchedOutline': {
+                                        border: '1px solid black',
+                                        borderRadius: '0',
+                                    },
+                                '& .MuiInputBase-root.Mui-focused': {
+                                    '& fieldset': {border: '1px solid black',},
+                                    },
+                                }}/>
+                </div>
 
                 <Wheel color={postItColor} 
                        onChange={(color) => {makePostItColorChanges(color)}}
@@ -115,13 +169,13 @@ function CreateForm(props) {
                          display: 'flex',
                          alignItems: 'center',
                          justifyContent: 'space-evenly'}}>                   
-                    <Button type='submit' 
+                    <Button type='submit' onClick={() => changeSubmitEvent(1)}
                             sx={{color: 'black', 
                                 backgroundColor: 'rgb(94, 242, 134)',
                                 borderRadius: '0',
                                 border: "1px solid black",
                                 width: '125px'}}>Make Post-It</Button>
-                    <Button type='submit' onClick={() => changeSubmitEvent(1)}
+                    <Button type='submit' onClick={() => changeSubmitEvent(2)}
                             sx={{color: 'black', 
                                 backgroundColor: 'rgb(227, 36, 36)',
                                 borderRadius: '0',
