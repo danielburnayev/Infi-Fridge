@@ -1,7 +1,7 @@
+import { client } from '../database/Client';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import {styled} from '@mui/material/styles';
 import {Wheel} from '@uiw/react-color';
 import {useState} from 'react';
 import './Pages.css';
@@ -31,14 +31,23 @@ function CreateForm(props) {
         noteTop.style.backgroundColor = darkerItsHex;
     }
 
-    const submitNewPostIt = (event) => {
+    const submitNewPostIt = async (event) => {
         event.preventDefault();
 
         if (submitEvent == 2 || (submitEvent != 0 &&
             event.target[0].value.length != 0 && 
             event.target[7].value.length != 0)) {
-            props.showOtherPages(0);
+                if (submitEvent == 1) {
+                    await client.from('Post-It Notes').insert({
+                        author: event.target[7].value,
+                        title: event.target[0].value,
+                        text_content: event.target[2].value,
+                        color: postItColor
+                    });
+                }
+                props.showOtherPages(0);
         }
+
 
         if (event.target[0].value.length == 0) {
             const titleBorder = document.getElementsByClassName('square-borders')[0];
@@ -65,10 +74,19 @@ function CreateForm(props) {
     
     return(
         <div className='form-background'>
+            <h1 style={{position: 'fixed', 
+                        margin: '0',
+                        width: '28vw', 
+                        left: 'calc(50% - 14vw)', 
+                        top: 'calc(50% - 30vh - 43px)',
+                        textAlign: 'center'}}>
+                Make your Post-It Note
+            </h1>
+
             <Box className='note-container' component="form" 
                  onSubmit={(event) => submitNewPostIt(event)}>
 
-                <div className='note-top'/>
+                <div className='note-top' />
 
                 <div className='square-borders'
                      style={{top: 'calc(7.5vh + 10px)',
@@ -160,7 +178,9 @@ function CreateForm(props) {
                        width={75} height={75}
                        style={{position: 'absolute',
                                bottom: '5px',
-                               right: '5px'}}/>
+                               right: '5px',
+                               border: '0.75px solid black',
+                               borderRadius: '37.5px'}}/>
 
                 <div style={{position: 'absolute',
                          width: '300px',
