@@ -1,3 +1,4 @@
+import {fetchPostItNotes} from '../database/Client';
 import Navbar from '../components/Navbar';
 import CreateForm from './CreateForm';
 import EditForm from './EditForm';
@@ -6,6 +7,19 @@ import './App.css';
 
 function App() {
   const [otherPages, showOtherPages] = useState(0);
+  const [postItNoteData, changePostItNoteData] = useState([]);
+
+  useEffect(() => {
+    async function wrapperFetchPostIts() {
+      const {data, error} = await fetchPostItNotes();
+      changePostItNoteData(data);
+      console.log(data);
+      console.log(error);
+    }
+
+    wrapperFetchPostIts();
+  }
+  , [otherPages]);
 
   useEffect(() => {
     window.scrollTo({

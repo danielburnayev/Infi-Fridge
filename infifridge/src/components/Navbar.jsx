@@ -14,7 +14,7 @@ function Navbar(props) {
 
     const doSearch = (event) => {
         event.preventDefault();
-        console.log(event.target[0].value);
+        // console.log(event.target[0].value);
     }   
 
     const showCreateForm = () => {

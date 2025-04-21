@@ -1,4 +1,4 @@
-import { client } from '../database/Client';
+import {insertPostItNote} from '../database/Client';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -38,12 +38,7 @@ function CreateForm(props) {
             event.target[0].value.length != 0 && 
             event.target[7].value.length != 0)) {
                 if (submitEvent == 1) {
-                    await client.from('Post-It Notes').insert({
-                        author: event.target[7].value,
-                        title: event.target[0].value,
-                        text_content: event.target[2].value,
-                        color: postItColor
-                    });
+                    await insertPostItNote(event, postItColor);
                 }
                 props.showOtherPages(0);
         }
