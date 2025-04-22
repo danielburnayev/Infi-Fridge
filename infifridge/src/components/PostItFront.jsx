@@ -1,13 +1,17 @@
 import check from '../assets/checkmark.png';
+import { Link } from 'react-router-dom';
 import './PostItFront.css';
 
 function PostItFront(props) {
     const readableTime = props.datePosted.substring(0, 16).replace('T', ', ');
+    const linkTitle = props.title.replaceAll(" ", "-");
 
     return(
-        <div className='post-it-front' id={props.title} style={{backgroundColor: props.color,
+        <Link className='post-it-front' id={linkTitle} to={`/edit/${linkTitle}`}
+                style={{backgroundColor: props.color, color: 'black',
                      rotate: `${props.randRot}deg`, 
-                     translate: `${props.randMoveX}vw ${props.randMoveY}vh`}}>
+                     translate: `${props.randMoveX}vw ${props.randMoveY}vh`,
+                     textDecoration: 'none'}}>
             <div style={{width: '100%', height: '5vh', 
                          backgroundColor: props.topColor}}/> 
 
@@ -32,7 +36,7 @@ function PostItFront(props) {
                     <img src={check} style={{height: '4.5vh', width: '2.25vw'}}/>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 }
 
