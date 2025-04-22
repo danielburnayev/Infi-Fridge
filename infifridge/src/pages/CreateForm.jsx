@@ -9,6 +9,7 @@ import './Pages.css';
 
 function CreateForm(props) {
     const [postItColor, changePostItColor] = useState('#FFFF00'); //yellow
+    const [postItTopColor, changePostItTopColor] = useState('#e5e100'); //darker yellow
     const [submitEvent, changeSubmitEvent] = useState(0);
     
     const makePostItColorChanges = (color) => {
@@ -28,6 +29,7 @@ function CreateForm(props) {
         const darkerItsHex = `#${(r << 16 | g << 8 | b).toString(16).padStart(6, '0')}`;
 
         changePostItColor(itsHex);
+        changePostItTopColor(darkerItsHex);
         theNote.style.backgroundColor = itsHex;
         noteTop.style.backgroundColor = darkerItsHex;
     }
@@ -39,11 +41,12 @@ function CreateForm(props) {
             event.target[0].value.length != 0 && 
             event.target[7].value.length != 0)) {
                 if (submitEvent == 1) {
-                    await insertPostItNote(event, postItColor);
+                    await insertPostItNote(event, postItColor, postItTopColor);
                     
                     const {data, error} = await fetchPostItNotes();
                     setPostIts(data);
                 }
+
                 props.showOtherPages(0);
         }
 
@@ -188,13 +191,15 @@ function CreateForm(props) {
                          display: 'flex',
                          alignItems: 'center',
                          justifyContent: 'space-evenly'}}>                   
-                    <Button type='submit' onClick={() => changeSubmitEvent(1)}
+                    <Button type='submit'
+                            onClick={() => changeSubmitEvent(1)}
                             sx={{color: 'black', 
                                 backgroundColor: 'rgb(94, 242, 134)',
                                 borderRadius: '0',
                                 border: "1px solid black",
                                 width: '125px'}}>Make Post-It</Button>
-                    <Button type='submit' onClick={() => changeSubmitEvent(2)}
+                    <Button type='submit'
+                            onClick={() => changeSubmitEvent(2)}
                             sx={{color: 'black', 
                                 backgroundColor: 'rgb(227, 36, 36)',
                                 borderRadius: '0',

@@ -62,10 +62,10 @@ function App() {
       <div id='fridge'>
         <div id='fridge-gap' />
 
-        {postIts.length != 0 && <PostItContainer postIts={postIts} />}
+        {postIts.length !== 0 && <PostItContainer postIts={postIts} />}
 
         <div style={{position: "absolute",
-                      width: "64.7vw",
+                      width: "65vw",
                       height: "2.5px",
                       bottom: "26vh",
                       backgroundColor: "black"}} />

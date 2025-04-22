@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PostItFront from "./PostItFront";
+import './PostItContainer.css';
 
 function PostItContainer(props) {
     const posts = props.postIts;
@@ -7,15 +8,20 @@ function PostItContainer(props) {
 
     const assignComponentPosts = () => {
         const newArr = [];
-        for (var i = 0; i < posts.length; i += 2) {
+
+        for (let i = 0; i < posts.length; i += 2) {
             newArr.push(
                 <div key={`level${i}`} 
-                     style={{width: '65vw', display: 'flex', gap: '24vw', 
-                             marginTop: '7vh', marginLeft: '6vw'}}>
+                     style={{width: '65vw', display: 'flex', gap: '22vw', 
+                             margin: '7vh -7vw 7vh 0'}}>
 
                     <PostItFront key={i}
                                 title={posts[i].title}
                                 color={posts[i].color}
+                                author={posts[i].author}
+                                votes={posts[i].votes}
+                                datePosted={posts[i].created_at}
+                                topColor={posts[i].top_color}
                                 randRot={25 * Math.random() - 12.5}
                                 randMoveX={8 * Math.random() - 4}
                                 randMoveY={8 * Math.random() - 4}
@@ -24,6 +30,10 @@ function PostItContainer(props) {
                         <PostItFront key={i + 1}
                                 title={posts[i + 1].title}
                                 color={posts[i + 1].color}
+                                author={posts[i + 1].author}
+                                votes={posts[i + 1].votes}
+                                datePosted={posts[i + 1].created_at}
+                                topColor={posts[i + 1].top_color}
                                 randRot={25 * Math.random() - 12.5}
                                 randMoveX={8 * Math.random() - 4}
                                 randMoveY={8 * Math.random() - 4}

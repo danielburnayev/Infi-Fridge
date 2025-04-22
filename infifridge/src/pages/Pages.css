@@ -6,6 +6,21 @@
     z-index: 100;
     width: 100%;
     height: 100%;
+    animation: fadeInCreateForm 0.25s ease-out;
+}
+
+.form-background-out {
+    animation: fadeOutCreateForm 0.25s ease-out;
+}
+
+@keyframes fadeInCreateForm {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeOutCreateForm {
+    from {opacity: 1;}
+    to {opacity: 0;}
 }
 
 .note-container {

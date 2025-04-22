@@ -14,12 +14,26 @@ function Navbar(props) {
 
     const doSearch = (event) => {
         event.preventDefault();
-        // console.log(event.target[0].value);
-    }   
+    };
 
     const showCreateForm = () => {
         props.showOtherPages(1);
-    }
+    };
+
+    const makeSortValueChanges = (event) => {
+        const theVal = event.target.value;
+        //use an upcoming method in props from App to change another one of its constants
+        
+        changeSortValue(theVal);
+    };
+
+    const makeOrgValueChanges = (event) => {
+        const theVal = event.target.value;
+        const postItContainer = document.getElementById('post-it-container');
+        postItContainer.style.flexDirection = (theVal == 'Top') ? 'column' : 'column-reverse';
+        
+        changeOrgValue(theVal);
+    };
 
     return(
         <div id="navbar-container">
@@ -64,7 +78,7 @@ function Navbar(props) {
                             id="sort-select"
                             value={sortValue} 
                             label="Sort By:" 
-                            onChange={(event) => changeSortValue(event.target.value)}>
+                            onChange={(event) => makeSortValueChanges(event)}>
                         <MenuItem value={"Most Recent"}>Most Recent</MenuItem>
                         <MenuItem value={"Best Received"}>Best Received</MenuItem>
                     </Select>
@@ -77,7 +91,7 @@ function Navbar(props) {
                             id="org-select"
                             value={orgValue} 
                             label="Organize From:" 
-                            onChange={(event) => changeOrgValue(event.target.value)}>
+                            onChange={(event) => makeOrgValueChanges(event)}>
                         <MenuItem value={"Bottom"}>Bottom</MenuItem>
                         <MenuItem value={"Top"}>Top</MenuItem>
                     </Select>
