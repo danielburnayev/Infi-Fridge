@@ -12,8 +12,8 @@ function PostItContainer(props) {
         for (let i = 0; i < posts.length; i += 2) {
             newArr.push(
                 <div key={`level${i}`} 
-                     style={{width: '65vw', display: 'flex', gap: '22vw', 
-                             margin: '7vh -7vw 7vh 0'}}>
+                     style={{width: '100%', display: 'flex', gap: '22vw', 
+                             margin: '0 -7vw 7vh 0'}}>
 
                     <PostItFront key={i}
                                 title={posts[i].title}
@@ -24,7 +24,7 @@ function PostItContainer(props) {
                                 topColor={posts[i].top_color}
                                 randRot={25 * Math.random() - 12.5}
                                 randMoveX={8 * Math.random() - 4}
-                                randMoveY={8 * Math.random() - 4}
+                                randMoveY={6.5 * Math.random() - 1.5}
                     />
                     {i + 1 < posts.length && 
                         <PostItFront key={i + 1}
@@ -36,7 +36,7 @@ function PostItContainer(props) {
                                 topColor={posts[i + 1].top_color}
                                 randRot={25 * Math.random() - 12.5}
                                 randMoveX={8 * Math.random() - 4}
-                                randMoveY={8 * Math.random() - 4}
+                                randMoveY={6.5 * Math.random() - 1.5}
                         />}
                 </div>
             );
@@ -69,9 +69,7 @@ function PostItContainer(props) {
 
 
     return(
-        <div id='post-it-container'>
-            {componentPosts}
-        </div>
+        <div id='post-it-container'> {componentPosts} </div>
     );
 }
 

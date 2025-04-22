@@ -5,21 +5,21 @@ function PostItFront(props) {
     const readableTime = props.datePosted.substring(0, 16).replace('T', ', ');
 
     return(
-        <div className='post-it-front' style={{backgroundColor: `${props.color}`,
+        <div className='post-it-front' id={props.title} style={{backgroundColor: props.color,
                      rotate: `${props.randRot}deg`, 
                      translate: `${props.randMoveX}vw ${props.randMoveY}vh`}}>
-            <div style={{width: '15vw', height: '5vh', 
-                         backgroundColor: `${props.topColor}`}}/> 
+            <div style={{width: '100%', height: '5vh', 
+                         backgroundColor: props.topColor}}/> 
 
-            <p style={{margin: '2.5px 0 0 2.5px'}}>{readableTime}</p>
+            <p style={{margin: '2.5px 0 0 2.5px'}}>{`${readableTime} UTC`}</p>
 
-            <div style={{width: '15vw', height: '15vh', overflowY: 'auto',
+            <div style={{width: '100%', height: '50%', overflowY: 'auto',
                             display: 'flex', flexDirection: 'column', 
                             alignItems: 'center'}}>    
                 <h1 style={{padding: '0 5px 0 5px', margin: '0'}}>{props.title}</h1>
             </div>
 
-            <div style={{position: 'absolute', left: '0', bottom: '0', width: '15vw',
+            <div style={{position: 'absolute', left: '0', bottom: '0', width: '100%',
                             display: 'flex', justifyContent: 'space-between',
                             marginRight: '2.5px'}}>
                 <div style={{width: '10.25vw', marginLeft: '3px'}}>

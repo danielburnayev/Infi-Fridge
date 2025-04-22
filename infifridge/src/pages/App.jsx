@@ -9,11 +9,12 @@ import './App.css';
 
 function App() {
   const [postIts, changePostIts] = useState([]);
-  const [otherPages, showOtherPages] = useState(0);
+  const [otherPages, showOtherPages] = useState(0); // 0 is the here, 1 is create, 2 is edit, 3 is view
+  const [sortType, changeSortType] = useState(0); //0 is most recent, 1 is least recent, 2 is best received, 3 is worst received
 
   useEffect(() => {
     async function wrapperFetchPostIts() {
-      const {data, error} = await fetchPostItNotes();
+      const {data, error} = await fetchPostItNotes(sortType);
       changePostIts(data);
       setPostIts(data);
     }
@@ -26,15 +27,15 @@ function App() {
         behavior: "smooth"
       });
     }
-  }, [otherPages]);
+  }, [otherPages, sortType]);
 
 
   return (
     <>
-      {otherPages == 1 && <CreateForm showOtherPages={showOtherPages}/>}
+      {otherPages == 1 && <CreateForm showOtherPages={showOtherPages} sortType={sortType}/>}
       {otherPages == 2 && <EditForm />}
 
-      <Navbar showOtherPages={showOtherPages}/>
+      <Navbar showOtherPages={showOtherPages} changeSortType={changeSortType}/>
 
       <div id='left-cab' className='cabinet'>
         <div className='cabinet-rim'/>
@@ -62,7 +63,8 @@ function App() {
       <div id='fridge'>
         <div id='fridge-gap' />
 
-        {postIts.length !== 0 && <PostItContainer postIts={postIts} />}
+        {postIts !== null && postIts.length !== 0 && 
+          <PostItContainer postIts={postIts}/>}
 
         <div style={{position: "absolute",
                       width: "65vw",

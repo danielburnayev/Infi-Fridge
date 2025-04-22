@@ -1,3 +1,4 @@
+import {fetchPostItNoteByTitle} from '../database/Client';
 import {useState} from 'react';
 import Button from '@mui/material/Button';
 import Select from '@mui/material/Select';
@@ -7,23 +8,41 @@ import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import "./Navbar.css";
+import "../pages/Pages.css";
 
 function Navbar(props) {
     const [sortValue, changeSortValue] = useState("Most Recent");
     const [orgValue, changeOrgValue] = useState("Bottom");
 
-    const doSearch = (event) => {
+    const doSearch = async (event) => {
         event.preventDefault();
+
+        const theTitle = event.target[0].value;
+        const {data, error} = await fetchPostItNoteByTitle(theTitle);
+        if (data != null) {
+            const wantedPostIt = document.getElementById(theTitle);
+            wantedPostIt.scrollIntoView({behavior: "smooth"});
+        }
+        else {
+            const searchBar = document.getElementById('search-bar');
+            searchBar.classList.add('shake-animation');
+            const timeout = setTimeout(() => {
+                searchBar.classList.remove('shake-animation');
+                clearTimeout(timeout);
+            }, 330);
+        }
     };
 
-    const showCreateForm = () => {
-        props.showOtherPages(1);
-    };
-
-    const makeSortValueChanges = (event) => {
+    const makeSortValueChanges = async (event) => {
         const theVal = event.target.value;
-        //use an upcoming method in props from App to change another one of its constants
-        
+        var type;
+
+        if (theVal == 'Most Recent') {type = 0;}
+        else if (theVal == 'Least Recent') {type = 1;}
+        else if (theVal == 'Best Received') {type = 2;}
+        else {type = 3;} //worst received
+
+        props.changeSortType(type);
         changeSortValue(theVal);
     };
 
@@ -44,7 +63,7 @@ function Navbar(props) {
                 </p>
             </div>
 
-            <Box component="form" onSubmit={(event) => doSearch(event)} 
+            <Box id="search-bar" component="form" onSubmit={(event) => doSearch(event)} 
                  sx={{display: "flex", alignItems: "center"}}>
                 <TextField variant="outlined" placeholder="Search for Post-It title" 
                            sx={{backgroundColor: "white", borderRadius: "0", marginRight: "5px"}}/>
@@ -60,7 +79,7 @@ function Navbar(props) {
             </Box>
 
             <div id="settings-container" style={{display: "flex", alignItems: "center"}}>
-                <Button onClick={showCreateForm} 
+                <Button onClick={() => props.showOtherPages(1)} 
                         sx={{color: 'black',
                              backgroundColor: 'rgba(156, 245, 115, 255)',
                              borderRadius: '0',
@@ -80,7 +99,9 @@ function Navbar(props) {
                             label="Sort By:" 
                             onChange={(event) => makeSortValueChanges(event)}>
                         <MenuItem value={"Most Recent"}>Most Recent</MenuItem>
+                        <MenuItem value={"Least Recent"}>Least Recent</MenuItem>
                         <MenuItem value={"Best Received"}>Best Received</MenuItem>
+                        <MenuItem value={"Worst Received"}>Worst Received</MenuItem>
                     </Select>
                 </FormControl>
 
