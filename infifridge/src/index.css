@@ -13,7 +13,7 @@
 
 body {
   margin: 0;
-  height: 100vh;
+  height: 300vh;
   background-color: rgb(246, 211, 164);
   overscroll-behavior: none;
 }

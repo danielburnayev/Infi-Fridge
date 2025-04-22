@@ -1,0 +1,8 @@
+#post-it-container {
+    height: 114vh;
+    width: 65vw;
+    position: absolute;
+    display: flex; 
+    flex-direction: column-reverse; 
+    align-items: flex-end;
+}

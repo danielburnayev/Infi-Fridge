@@ -1,4 +1,5 @@
-import {insertPostItNote} from '../database/Client';
+import {insertPostItNote, fetchPostItNotes} from '../database/Client';
+import {setPostIts} from '../database/PostItCollection';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -39,6 +40,9 @@ function CreateForm(props) {
             event.target[7].value.length != 0)) {
                 if (submitEvent == 1) {
                     await insertPostItNote(event, postItColor);
+                    
+                    const {data, error} = await fetchPostItNotes();
+                    setPostIts(data);
                 }
                 props.showOtherPages(0);
         }

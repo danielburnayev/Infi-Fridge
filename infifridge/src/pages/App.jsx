@@ -1,4 +1,6 @@
 import {fetchPostItNotes} from '../database/Client';
+import {setPostIts} from '../database/PostItCollection';
+import PostItContainer from '../components/PostItContainer';
 import Navbar from '../components/Navbar';
 import CreateForm from './CreateForm';
 import EditForm from './EditForm';
@@ -6,28 +8,26 @@ import {useState, useEffect} from 'react';
 import './App.css';
 
 function App() {
+  const [postIts, changePostIts] = useState([]);
   const [otherPages, showOtherPages] = useState(0);
-  const [postItNoteData, changePostItNoteData] = useState([]);
 
   useEffect(() => {
     async function wrapperFetchPostIts() {
       const {data, error} = await fetchPostItNotes();
-      changePostItNoteData(data);
-      console.log(data);
-      console.log(error);
+      changePostIts(data);
+      setPostIts(data);
     }
+    if (otherPages == 0) {
+      wrapperFetchPostIts();
 
-    wrapperFetchPostIts();
-  }
-  , [otherPages]);
-
-  useEffect(() => {
-    window.scrollTo({
-      left: 0, 
-      top: window.screen.height, 
-      behavior: "smooth"});
+      window.scrollTo({
+        left: 0, 
+        top: document.getElementById('root').scrollHeight,
+        behavior: "smooth"
+      });
     }
-  , []);
+  }, [otherPages]);
+
 
   return (
     <>
@@ -61,12 +61,14 @@ function App() {
 
       <div id='fridge'>
         <div id='fridge-gap' />
+
+        {postIts.length != 0 && <PostItContainer postIts={postIts} />}
+
         <div style={{position: "absolute",
                       width: "64.7vw",
                       height: "2.5px",
                       bottom: "26vh",
                       backgroundColor: "black"}} />
-
         <div className='arm-block' style={{bottom: "20vh", left: "22.5vw"}}/>
         <div className='arm-block' style={{bottom: "20vh", right: "22.5vw"}}/>
         <div className='arm-block' style={{bottom: "35vh", left: "45vw"}}/>

@@ -1,0 +1,16 @@
+.post-it-front {
+    width: 15vw;
+    height: 30vh;
+    text-align: center;
+    border: 0.25px solid black;
+}
+
+.post-it-front:hover {
+    animation: hoverExpand 0.33s ease-out forwards;
+    z-index: 4;
+}
+
+@keyframes hoverExpand {
+    from {scale: 1;}
+    to {scale: 1.25;}
+}
