@@ -6,8 +6,6 @@ const table = "";
 
 const client = createClient(url, key);
 
-// const { data, error } = await client.from(table).delete().eq('id', 36);
-
 export const insertPostItNote = async (givenEvent, givenColor, givenTopColor) => {
     await client.from(table).insert({
         author: givenEvent.target[7].value,
@@ -39,4 +37,12 @@ export const updatePostItByTitle = async (givenTitle, newAuthor, newTitle, newTe
     const newObj = {author: newAuthor, title: newTitle, text_content: newText, 
                     color: newColor, top_color: newTopColor, img_url: newImgURL};
     await client.from(table).update(newObj).eq("title", givenTitle);
+}
+
+export const updatePostsVotesByTitle = async (givenTitle, newVotes) => {
+    await client.from(table).update({votes: newVotes}).eq("title", givenTitle);
+}
+
+export const deletePostItByTitle = async (givenTitle) => {
+    await client.from(table).delete().eq('title', givenTitle);
 }

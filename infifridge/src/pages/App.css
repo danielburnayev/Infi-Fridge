@@ -1,4 +1,14 @@
-#root {
+/* #root {
+  position: absolute;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(246, 211, 164);
+} */
+
+#app-container {
   position: absolute;
   display: flex;
   align-items: flex-end;

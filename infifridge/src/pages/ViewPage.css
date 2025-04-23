@@ -1,0 +1,8 @@
+#view-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    width: 100vw;
+    background-color: rgb(248, 242, 242);
+}

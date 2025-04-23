@@ -18,20 +18,12 @@ function App() {
       changePostIts(data);
       setPostIts(data);
     }
-    if (otherPages == 0) {
-      wrapperFetchPostIts();
-
-      window.scrollTo({
-        left: 0, 
-        top: document.getElementById('root').scrollHeight,
-        behavior: "smooth"
-      });
-    }
+    if (otherPages == 0) {wrapperFetchPostIts();}
   }, [otherPages, sortType]);
 
 
   return (
-    <>
+    <div id='app-container'>
       {otherPages == 1 && <CreateForm showOtherPages={showOtherPages} sortType={sortType}/>}
       {otherPages == 2 && <EditForm />}
 
@@ -117,7 +109,7 @@ function App() {
                      border: "0.8px solid rgb(201, 201, 201)",
                      borderRadius: "0 5px 5px 0"}} />
       </div>
-    </>
+    </div>
   );
 }
 

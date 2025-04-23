@@ -46,7 +46,7 @@ function PostItContainer(props) {
     }
 
     const changeSizes = () => {
-        const root = document.getElementById('root');
+        const appContainer = document.getElementById('app-container');
         const fridge = document.getElementById('fridge');
         const fridgeGap = document.getElementById('fridge-gap');
         const leftFridgeArm = document.getElementById('left-fridge-arm');
@@ -54,7 +54,7 @@ function PostItContainer(props) {
         const postItContainer = document.getElementById('post-it-container');
 
         const heightIncrease = Math.floor(posts.length / 7) * 140;
-        root.style.height = `${155 + heightIncrease}vh`;
+        appContainer.style.height = `${155 + heightIncrease}vh`;
         fridge.style.height = `${140 + heightIncrease}vh`;
         fridgeGap.style.height = `${114 + heightIncrease}vh`;
         leftFridgeArm.style.height = `${94 + heightIncrease}vh`;

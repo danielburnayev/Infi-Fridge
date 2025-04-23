@@ -7,13 +7,11 @@ function PostItFront(props) {
     const linkTitle = props.title.replaceAll(" ", "-");
 
     return(
-        <Link className='post-it-front' id={linkTitle} to={`/edit/${linkTitle}`}
-                style={{backgroundColor: props.color, color: 'black',
+        <Link className='post-it-front' id={props.title} to={`/edit/${linkTitle}`}
+                style={{backgroundColor: props.color,
                      rotate: `${props.randRot}deg`, 
-                     translate: `${props.randMoveX}vw ${props.randMoveY}vh`,
-                     textDecoration: 'none'}}>
-            <div style={{width: '100%', height: '5vh', 
-                         backgroundColor: props.topColor}}/> 
+                     translate: `${props.randMoveX}vw ${props.randMoveY}vh`}}>
+            <div className='post-it-top' style={{backgroundColor: props.topColor}}/> 
 
             <p style={{margin: '2.5px 0 0 2.5px'}}>{`${readableTime} UTC`}</p>
 
@@ -26,11 +24,10 @@ function PostItFront(props) {
             <div style={{position: 'absolute', left: '0', bottom: '0', width: '100%',
                             display: 'flex', justifyContent: 'space-between',
                             marginRight: '2.5px'}}>
-                <div style={{width: '10.25vw', marginLeft: '3px'}}>
-                    <h3 style={{overflowX: 'scroll', overflowY: 'none', textWrap: 'nowrap'}}>
-                        {`-${props.author}`}
-                    </h3>
-                </div>
+                <h3 style={{overflowX: 'scroll', overflowY: 'none', 
+                            textWrap: 'nowrap', width: '10.25vw', marginLeft: '3px'}}>
+                    {`-${props.author}`}
+                </h3>
                 <div style={{display: 'flex', alignItems: 'center', marginRight: '3px'}}>
                     <h3 style={{marginRight: '3px'}}>{`${props.votes}`}</h3>
                     <img src={check} style={{height: '4.5vh', width: '2.25vw'}}/>
