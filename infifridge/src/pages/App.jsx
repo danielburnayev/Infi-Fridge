@@ -28,7 +28,8 @@ function App() {
         <CreateForm formTitle='Make your Post-It Note'
                     showOtherPages={showOtherPages} 
                     sortType={sortType}
-                    givenPostIt={null}/>}
+                    givenPostIt={null}
+                    parentPostItTitle={null}/>}
       {otherPages == 2 && <EditForm />}
 
       <Navbar showOtherPages={showOtherPages} changeSortType={changeSortType}/>

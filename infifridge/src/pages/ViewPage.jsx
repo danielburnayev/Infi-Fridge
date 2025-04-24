@@ -13,6 +13,7 @@ function ViewPage() {
     const navigate = useNavigate();
     const postItTitle = params.postItTitle.replaceAll("-", " ");
     const [thePostIt, changeThePostIt] = useState(null);
+    const [theComments, changeTheComments] = useState([]);
     const [rerenderer, changeRerenderer] = useState(true);
     const [pageNum, changePageNum] = useState(0);
 
@@ -32,8 +33,36 @@ function ViewPage() {
             changeThePostIt(data);
         }
 
+        async function makeVisiblePostItComments() {
+            const newArr = [];
+            if (thePostIt != null) {
+                for (let i = 0; i < thePostIt.comments.length; i++) {
+                    const {data, error} = await fetchPostItNoteByTitle(thePostIt.comments[i].title);
+                    newArr.push(
+                        <div key={`level${i}comments`} 
+                            style={{width: '100%', display: 'flex', justifyContent: 'space-around'}}>
+        
+                            <PostItFront key={`comment${i}`}
+                                        title={thePostIt.comments[i].title}
+                                        color={data.color}
+                                        author={data.author}
+                                        votes={data.votes}
+                                        datePosted={data.created_at}
+                                        topColor={data.top_color}
+                                        randRot={0}
+                                        randMoveX={0}
+                                        randMoveY={0}
+                            />
+                        </div>
+                    );
+                }
+            }
+            changeTheComments(newArr);
+        }
+
         wrapperFetchPostIt();
-    }, [rerenderer, postItTitle]);
+        makeVisiblePostItComments();
+    }, [rerenderer, postItTitle, pageNum]);
 
     return(
         <>
@@ -43,7 +72,15 @@ function ViewPage() {
                         <CreateForm formTitle='Edit your Post-It Note'
                             showOtherPages={changePageNum} 
                             sortType={null}
-                            givenPostIt={thePostIt}/>
+                            givenPostIt={thePostIt}
+                            parentPostItTitle={null}/>
+                    }
+                    {pageNum == 2 && 
+                        <CreateForm formTitle='Create your comment'
+                            showOtherPages={changePageNum} 
+                            sortType={null}
+                            givenPostIt={null}
+                            parentPostItTitle={postItTitle}/>
                     }
 
                     <div style={{width: '35vw', height: '70vh', 
@@ -117,18 +154,24 @@ function ViewPage() {
                         </div>
                     </div>
 
-                    <h1>Comments:</h1>
-                    <div style={{width: '90%', border: '1px solid black'}}/>
+                    <h1 style={{marginBottom: '5px'}}>Comments:</h1>
+                    <Button onClick={() => changePageNum(2)}
+                            sx={{color: 'black',
+                                backgroundColor: 'yellow',
+                                borderRadius: '0',
+                                border: '0.5px solid black',
+                                margin: '5px 0 5px 0'}}> 
+                                    Add Comment
+                    </Button>
+                    {theComments.length > 0 &&
+                        <div style={{width: '90%', border: '1px solid black'}}> 
+                            {theComments}
+                        </div>
+                    }
                     
-                    {/* show the view of the selected post-it (make it a PRETTY big post-it) */}
-                        {/* Can scroll further down to see the text/image in the post-it */}
                 </div>
             }
         </>
-
-            // Allow a section below the main post-it to leave a comment
-            // it'll lexad be another way to lead to the create form
-            // make sure when posted, it appears as a comment for the main post-it AND a post-it on the fridge
 
             // After scrolling through the post-it, show post-it comments of the main post-it
             // In 3 column grid with an many rows necesary

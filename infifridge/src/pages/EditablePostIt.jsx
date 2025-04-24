@@ -1,4 +1,4 @@
-import {insertPostItNote, fetchPostItNotes, fetchPostItNoteByTitle, updatePostItByTitle} from '../database/Client';
+import {insertPostItNote, fetchPostItNotes, fetchPostItNoteByTitle, updatePostItByTitle, addCommentToPostItByTitle} from '../database/Client';
 import {setPostIts} from '../database/PostItCollection';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -48,10 +48,14 @@ function EditablePostIt(props) {
                 titleSearchResult = data;
                 
                 if (submitEvent == 1 && titleSearchResult == null) {
-                    if (postIt == null && props.sortType != null) {
+                    if (postIt == null) {
                         await insertPostItNote(event, postItColor, postItTopColor);
+                        
+                        if (props.parentPostItTitle != null) {
+                            await addCommentToPostItByTitle(props.parentPostItTitle, event.target[0].value);
+                        }
                     } //add new data
-                    else {
+                    else if (postIt != null || props.sortType == null) {
                         await updatePostItByTitle(postIt.title,
                                                     event.target[7].value,
                                                     event.target[0].value,

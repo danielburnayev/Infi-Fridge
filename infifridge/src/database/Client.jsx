@@ -15,7 +15,7 @@ export const insertPostItNote = async (givenEvent, givenColor, givenTopColor) =>
         text_content: givenEvent.target[2].value,
         color: givenColor,
         top_color: givenTopColor,
-        img_url: (imageURL.length === 0) ? null : imageURL
+        img_url: (imageURL.length === 0) ? null : imageURL,
     });
 }
 
@@ -41,6 +41,17 @@ export const updatePostItByTitle = async (givenTitle, newAuthor, newTitle, newTe
                     img_url: (newImgURL.length === 0) ? null : newImgURL,
                     };
     await client.from(table).update(newObj).eq("title", givenTitle);
+}
+
+export const addCommentToPostItByTitle = async (givenTitle, newCommentName) => {
+    const {data, error} = await fetchPostItNoteByTitle(givenTitle);
+
+    const arr = (data.comments != null) ? data.comments : new Array();
+    const newCommentObj = {title: newCommentName};
+    arr.push(newCommentObj);
+    const theObj = {comments: arr};
+
+    await client.from(table).update(theObj).eq("title", givenTitle);
 }
 
 export const updatePostsVotesByTitle = async (givenTitle, newVotes) => {

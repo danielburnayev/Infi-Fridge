@@ -15,7 +15,8 @@ function CreateForm(props) {
 
             <EditablePostIt showOtherPages={props.showOtherPages} 
                             sortType={props.sortType} 
-                            givenPostIt={props.givenPostIt}/>
+                            givenPostIt={props.givenPostIt}
+                            parentPostItTitle={props.parentPostItTitle}/>
         </div>
     );
 }
