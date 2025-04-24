@@ -24,7 +24,11 @@ function App() {
 
   return (
     <div id='app-container'>
-      {otherPages == 1 && <CreateForm showOtherPages={showOtherPages} sortType={sortType}/>}
+      {otherPages == 1 && 
+        <CreateForm formTitle='Make your Post-It Note'
+                    showOtherPages={showOtherPages} 
+                    sortType={sortType}
+                    givenPostIt={null}/>}
       {otherPages == 2 && <EditForm />}
 
       <Navbar showOtherPages={showOtherPages} changeSortType={changeSortType}/>

@@ -5,10 +5,12 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import {Wheel} from '@uiw/react-color';
 import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import './Pages.css';
 
 function EditablePostIt(props) {
     const postIt = props.givenPostIt;
+    const navigate = useNavigate();
     const [postItColor, changePostItColor] = useState((postIt != null) ? postIt.color : '#FFFF00'); //yellow
     const [postItTopColor, changePostItTopColor] = useState((postIt != null) ? postIt.top_color : '#e5e100'); //darker yellow
     const [submitEvent, changeSubmitEvent] = useState(0);
@@ -46,17 +48,23 @@ function EditablePostIt(props) {
                 titleSearchResult = data;
                 
                 if (submitEvent == 1 && titleSearchResult == null) {
-                    if (postIt == null) {await insertPostItNote(event, postItColor, postItTopColor);} //add new data
-                    else {await updatePostItByTitle(postIt.title,
+                    if (postIt == null && props.sortType != null) {
+                        await insertPostItNote(event, postItColor, postItTopColor);
+                    } //add new data
+                    else {
+                        await updatePostItByTitle(postIt.title,
+                                                    event.target[7].value,
                                                     event.target[0].value,
                                                     event.target[2].value,
-                                                    event.target[7].value,
                                                     postItColor, 
                                                     postItTopColor,
-                                                    event.target[5].value);} //update data in the database (edit)
-                    
+                                                    event.target[5].value);
+                    } //update data in the database (edit)
+
                     const {data, error} = await fetchPostItNotes(props.sortType);
                     setPostIts(data);
+                    if (postIt != null) {navigate(`/edit/${event.target[0].value.replaceAll(" ", "-")}`);}
+
                     props.showOtherPages(0);
                 }
                 else if (submitEvent == 2) {props.showOtherPages(0);}
@@ -84,7 +92,7 @@ function EditablePostIt(props) {
             }, 330);
         }
     }
-    
+
     return(
         <Box className='note-container' component="form" 
                 onSubmit={(event) => submitNewPostIt(event)}>

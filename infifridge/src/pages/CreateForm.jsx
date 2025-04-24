@@ -10,12 +10,12 @@ function CreateForm(props) {
                         left: 'calc(50% - 14vw)', 
                         top: 'calc(50% - 30vh - 43px)',
                         textAlign: 'center'}}>
-                Make your Post-It Note
+                {props.formTitle}
             </h1>
 
             <EditablePostIt showOtherPages={props.showOtherPages} 
                             sortType={props.sortType} 
-                            givenPostIt={null}/>
+                            givenPostIt={props.givenPostIt}/>
         </div>
     );
 }

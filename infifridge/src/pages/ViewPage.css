@@ -4,5 +4,6 @@
     flex-direction: column;
     place-items: center;
     width: 100vw;
+    height: 100vh;
     background-color: rgb(248, 242, 242);
 }

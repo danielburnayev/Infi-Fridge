@@ -7,13 +7,15 @@ const table = "";
 const client = createClient(url, key);
 
 export const insertPostItNote = async (givenEvent, givenColor, givenTopColor) => {
+    const imageURL = givenEvent.target[5].value;
+    
     await client.from(table).insert({
         author: givenEvent.target[7].value,
         title: givenEvent.target[0].value,
         text_content: givenEvent.target[2].value,
         color: givenColor,
         top_color: givenTopColor,
-        img_url: givenEvent.target[5].value,
+        img_url: (imageURL.length === 0) ? null : imageURL
     });
 }
 
@@ -35,7 +37,9 @@ export const fetchPostItNoteByTitle = async (givenTitle) => {
 
 export const updatePostItByTitle = async (givenTitle, newAuthor, newTitle, newText, newColor, newTopColor, newImgURL) => {
     const newObj = {author: newAuthor, title: newTitle, text_content: newText, 
-                    color: newColor, top_color: newTopColor, img_url: newImgURL};
+                    color: newColor, top_color: newTopColor, 
+                    img_url: (newImgURL.length === 0) ? null : newImgURL,
+                    };
     await client.from(table).update(newObj).eq("title", givenTitle);
 }
 

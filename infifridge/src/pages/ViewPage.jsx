@@ -14,6 +14,7 @@ function ViewPage() {
     const postItTitle = params.postItTitle.replaceAll("-", " ");
     const [thePostIt, changeThePostIt] = useState(null);
     const [rerenderer, changeRerenderer] = useState(true);
+    const [pageNum, changePageNum] = useState(0);
 
     const likePostIt = async () => {
         await updatePostsVotesByTitle(postItTitle, thePostIt.votes + 1);
@@ -32,12 +33,19 @@ function ViewPage() {
         }
 
         wrapperFetchPostIt();
-    }, [rerenderer]);
+    }, [rerenderer, postItTitle]);
 
     return(
         <>
             {thePostIt != null && 
                 <div id='view-container'>
+                    {pageNum == 1 && 
+                        <CreateForm formTitle='Edit your Post-It Note'
+                            showOtherPages={changePageNum} 
+                            sortType={null}
+                            givenPostIt={thePostIt}/>
+                    }
+
                     <div style={{width: '35vw', height: '70vh', 
                                 border: '1px solid black', 
                                 marginTop: '5vh',
@@ -50,9 +58,28 @@ function ViewPage() {
                                          backgroundColor: `${thePostIt.color}`,
                                          borderRadius: '0',
                                          height: '75%',
-                                         marginRight: '5px'}}>
+                                         marginRight: '10px'}}>
                                             Delete
                             </Button>
+
+                            <Button onClick={() => changePageNum(1)}
+                                    sx={{color: 'black',
+                                         backgroundColor: `${thePostIt.color}`,
+                                         borderRadius: '0',
+                                         height: '75%',
+                                         marginRight: '10px'}}>
+                                            Edit
+                            </Button>
+
+                            <Button onClick={() => navigate('/')}
+                                    sx={{color: 'black',
+                                         backgroundColor: `${thePostIt.color}`,
+                                         borderRadius: '0',
+                                         height: '75%',
+                                         marginRight: '10px'}}>
+                                            Leave
+                            </Button>
+
                         </div>
                         
                         <p style={{marginBottom: '0', marginLeft: '5px'}}>
@@ -68,11 +95,11 @@ function ViewPage() {
                                      border: '0.5px solid black', 
                                      margin: '5px 0 0 5px'}}>
 
-                            <p style={{whiteSpace: 'pre-line', margin: '0'}}>
+                            <p style={{whiteSpace: 'pre-line', margin: '5px 0 0 5px'}}>
                                 {`${thePostIt.text_content}`}
                             </p>
-                            <img src={(thePostIt.img_url == '') ? null : thePostIt.img_url}
-                                 style={{maxWidth: '100%'}}/>
+                            <img src={thePostIt.img_url}
+                                 style={{maxWidth: '100%', margin: '5px 0 0 5px'}}/>
                         </div>
                         
                         <div style={{display: 'flex', 
