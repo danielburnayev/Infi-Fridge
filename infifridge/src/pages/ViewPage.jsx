@@ -42,7 +42,9 @@ function ViewPage() {
                 for (let i = 0; i < data.length; i += 3) {
                     newArr.push(
                         <div key={`level${i}comments`} 
-                            style={{width: '100%', display: 'flex', justifyContent: 'space-around'}}>
+                            style={{width: '100%', display: 'flex', 
+                                    justifyContent: 'space-around', 
+                                    padding: '25px 0 25px 0'}}>
         
                             <PostItFront key={`comment${i}`}
                                         title={data[i].title}
@@ -192,7 +194,11 @@ function ViewPage() {
                                     Add Comment
                     </Button>
                     {theComments != null && theComments.length > 0 &&
-                        <div style={{width: '90%', border: '1px solid black'}}> 
+                        <div style={{width: '90%', border: '3.5px inset rgb(211, 211, 211)',
+                                    marginBottom: '25px', backgroundColor: 'rgb(194, 148, 109)'}}> 
+                            <div style={{display: 'flex', justifyContent: 'space-around'}}>
+                                <div className='board-buttons' style={{margin: '10px 0 0 0'}}/>
+                            </div>
                             {theComments}
                         </div>
                     }
