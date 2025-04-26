@@ -1,4 +1,4 @@
-# Web Development Final Project - *Infi-Fridge*
+# Web Development Final Project - *Infi-Fridge* (https://the-infinite-fridge.netlify.app/)
 
 Submitted by: **Daniel Burnayev**
 
