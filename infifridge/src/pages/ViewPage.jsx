@@ -185,7 +185,7 @@ function ViewPage() {
                     </div>
 
                     <h1 style={{marginBottom: '5px'}}>Comments:</h1>
-                    <Button onClick={() => changePageNum(2)}
+                    <Button onClick={() => changePageNum(2)} disabled
                             sx={{color: 'black',
                                 backgroundColor: 'yellow',
                                 borderRadius: '0',

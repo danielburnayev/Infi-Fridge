@@ -79,7 +79,7 @@ function Navbar(props) {
             </Box>
 
             <div id="settings-container" style={{display: "flex", alignItems: "center"}}>
-                <Button onClick={() => props.showOtherPages(1)} 
+                <Button onClick={() => props.showOtherPages(1)} disabled 
                         sx={{color: 'black',
                              backgroundColor: 'rgba(156, 245, 115, 255)',
                              borderRadius: '0',
