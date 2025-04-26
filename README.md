@@ -4,7 +4,7 @@ Submitted by: **Daniel Burnayev**
 
 This web app: **Place and read others' post-it notes on an online refrigerator that's constantly expanding.**
 
-Time spent: **X** hours spent in total
+Time spent: **30** hours spent in total
 
 ## Required Features
 
@@ -54,12 +54,12 @@ The following **optional** features are implemented:
   - On the post page of the new post, the referenced post is displayed and linked, creating a thread
 - [ ] Users can customize the interface
   - e.g., selecting the color scheme or showing the content and image of each post on the home feed
-- [ ] Users can add more characterics to their posts
+- [X] Users can add more characterics to their posts
   - Users can share and view web videos
   - Users can set flags such as "Question" or "Opinion" while creating a post
   - Users can filter posts by flags on the home feed
   - Users can upload images directly from their local machine as an image file
-- [ ] Web app displays a loading animation whenever data is being fetched
+- [X] Web app displays a loading animation whenever data is being fetched
 
 The following **additional** features are implemented:
 
@@ -72,7 +72,7 @@ Here's a walkthrough of implemented user stories:
 <img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  
+GIF created with LiceCAP  
 <!-- Recommended tools:
 [Kap](https://getkap.co/) for macOS
 [ScreenToGif](https://www.screentogif.com/) for Windows
