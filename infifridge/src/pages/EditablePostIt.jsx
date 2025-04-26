@@ -49,7 +49,7 @@ function EditablePostIt(props) {
                 
                 if (submitEvent == 1 && titleSearchResult == null) {
                     if (postIt == null) {
-                        await insertPostItNote(event, postItColor, postItTopColor);
+                        await insertPostItNote(event, postItColor, postItTopColor, props.parentPostItTitle);
                         
                         if (props.parentPostItTitle != null) {
                             await addCommentToPostItByTitle(props.parentPostItTitle, event.target[0].value);

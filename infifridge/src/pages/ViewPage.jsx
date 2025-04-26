@@ -1,6 +1,6 @@
 import PostItFront from '../components/PostItFront';
 import CreateForm from './CreateForm';
-import {fetchPostItNoteByTitle, updatePostsVotesByTitle, deletePostItByTitle} from '../database/Client';
+import {fetchPostItNoteByTitle, updatePostsVotesByTitle, deletePostItByTitle, fetchComments} from '../database/Client';
 import check from '../assets/checkmark.png';
 import {useEffect, useState} from "react";
 import {useParams, useNavigate} from "react-router-dom";
@@ -35,24 +35,52 @@ function ViewPage() {
 
         async function makeVisiblePostItComments() {
             const newArr = [];
-            if (thePostIt != null) {
-                for (let i = 0; i < thePostIt.comments.length; i++) {
-                    const {data, error} = await fetchPostItNoteByTitle(thePostIt.comments[i].title);
+            const {data, error} = await fetchComments(postItTitle);
+            console.log(data);
+
+            if (data != null) {
+                for (let i = 0; i < data.length; i += 3) {
                     newArr.push(
                         <div key={`level${i}comments`} 
                             style={{width: '100%', display: 'flex', justifyContent: 'space-around'}}>
         
                             <PostItFront key={`comment${i}`}
-                                        title={thePostIt.comments[i].title}
-                                        color={data.color}
-                                        author={data.author}
-                                        votes={data.votes}
-                                        datePosted={data.created_at}
-                                        topColor={data.top_color}
+                                        title={data[i].title}
+                                        color={data[i].color}
+                                        author={data[i].author}
+                                        votes={data[i].votes}
+                                        datePosted={data[i].created_at}
+                                        topColor={data[i].top_color}
                                         randRot={0}
                                         randMoveX={0}
                                         randMoveY={0}
                             />
+
+                            {i + 1 < data.length &&  
+                                <PostItFront key={`comment${i + 1}`}
+                                        title={data[i + 1].title}
+                                        color={data[i + 1].color}
+                                        author={data[i + 1].author}
+                                        votes={data[i + 1].votes}
+                                        datePosted={data[i + 1].created_at}
+                                        topColor={data[i + 1].top_color}
+                                        randRot={0}
+                                        randMoveX={0}
+                                        randMoveY={0}
+                                />}
+
+                            {i + 2 < data.length &&  
+                                <PostItFront key={`comment${i + 2}`}
+                                        title={data[i + 2].title}
+                                        color={data[i + 2].color}
+                                        author={data[i + 2].author}
+                                        votes={data[i + 2].votes}
+                                        datePosted={data[i + 2].created_at}
+                                        topColor={data[i + 2].top_color}
+                                        randRot={0}
+                                        randMoveX={0}
+                                        randMoveY={0}
+                                />}
                         </div>
                     );
                 }
@@ -163,7 +191,7 @@ function ViewPage() {
                                 margin: '5px 0 5px 0'}}> 
                                     Add Comment
                     </Button>
-                    {theComments.length > 0 &&
+                    {theComments != null && theComments.length > 0 &&
                         <div style={{width: '90%', border: '1px solid black'}}> 
                             {theComments}
                         </div>
@@ -172,10 +200,6 @@ function ViewPage() {
                 </div>
             }
         </>
-
-            // After scrolling through the post-it, show post-it comments of the main post-it
-            // In 3 column grid with an many rows necesary
-            // basically going to be a bunch of PostItFronts
     );
 }
 
