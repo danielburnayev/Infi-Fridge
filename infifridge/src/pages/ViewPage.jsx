@@ -36,7 +36,6 @@ function ViewPage() {
         async function makeVisiblePostItComments() {
             const newArr = [];
             const {data, error} = await fetchComments(postItTitle);
-            console.log(data);
 
             if (data != null) {
                 for (let i = 0; i < data.length; i += 3) {
