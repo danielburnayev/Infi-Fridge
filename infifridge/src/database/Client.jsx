@@ -1,8 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 
-const url = '';
-const key = '';
-const table = "";
+const url = 'https://upjgczabrbutrantpzdc.supabase.co';
+const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwamdjemFicmJ1dHJhbnRwemRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUwODM3ODMsImV4cCI6MjA2MDY1OTc4M30.1pl08vw0OJZpkVUfEGUymwr7LtaJD56cILSFMOlVMvk';
+const table = "Post-It Notes";
 
 const client = createClient(url, key);
 
@@ -18,6 +18,7 @@ export const insertPostItNote = async (givenEvent, givenColor, givenTopColor, pa
         img_url: (imageURL.length === 0) ? null : imageURL,
         parent_post_title: parentPostTitle
     });
+    
 }
 
 export const fetchPostItNotes = async (sortType) => {
