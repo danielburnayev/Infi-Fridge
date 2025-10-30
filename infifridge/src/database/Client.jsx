@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
 const url = 'https://xbrnswcvgbdmshbpurgp.supabase.co';
-const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhicm5zd2N2Z2JkbXNoYnB1cmdwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE3OTQzNDgsImV4cCI6MjA3NzM3MDM0OH0.tv9Hzw8nz_zf-znKEK5sXT7i4O1sqIpbrdGFN9ffBcc.1pl08vw0OJZpkVUfEGUymwr7LtaJD56cILSFMOlVMvk';
+const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhicm5zd2N2Z2JkbXNoYnB1cmdwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE3OTQzNDgsImV4cCI6MjA3NzM3MDM0OH0.tv9Hzw8nz_zf-znKEK5sXT7i4O1sqIpbrdGFN9ffBcc';
 const table = "Post-It Notes";
 
 const client = createClient(url, key);
